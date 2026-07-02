@@ -14,4 +14,13 @@ public class Libro {
     private String autor;
     private String categoria;
     private boolean disponible; 
+    
+    public Libro (String codigo, String titulo, String categoria, boolean disponible){
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.categoria = categoria;
+        this.disponible = disponible;
+        
+    }
 }
