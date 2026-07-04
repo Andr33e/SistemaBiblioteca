@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.HashSet;
+
 /**
  *
  * @author andr33ee
@@ -23,4 +25,36 @@ public class Libro {
         this.disponible = disponible;
         
     }
+ public String getCodigo(){
+     return codigo;
+  }
+ public void setCodigo(String codigo){
+        this.codigo = codigo;
+  }
+ public String getTitulo() {
+    return titulo;
 }
+ public String setTitulo(String titulo){
+        this.titulo = titulo;
+        return null;
+}
+ public String getAutor(){
+     return autor;
+}
+ public void setAutor(String autor){
+     this.autor = autor;
+ }
+ public String getCategoria(){
+     return categoria;
+ }
+ public void setCategoria(String categoria){
+     this.categoria = categoria;
+ }
+public boolean isDisponible() {
+    return disponible;
+}
+ public void setDisponible(boolean disponible) {
+    this.disponible = disponible;
+}
+}
+ 
