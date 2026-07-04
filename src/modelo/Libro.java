@@ -56,5 +56,12 @@ public boolean isDisponible() {
  public void setDisponible(boolean disponible) {
     this.disponible = disponible;
 }
+ @Override
+public String toString() {
+    return "Código: " + codigo +
+           "\nTítulo: " + titulo +
+           "\nAutor: " + autor +
+           "\nCategoría: " + categoria +
+           "\nDisponible: " + (disponible ? "Sí" : "No");
 }
- 
+}
