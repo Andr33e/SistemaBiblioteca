@@ -8,9 +8,6 @@ package modelo;
  *
  * @author andr33ee
  */
-public class Usuario {
-    private String codigo;
-    private String nombre;
-    private String usuario;
-    private String contraseña;
+class Sring {
+    
 }
