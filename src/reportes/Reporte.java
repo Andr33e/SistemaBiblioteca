@@ -10,7 +10,7 @@ public class Reporte {
 
     public static void reportePrestamo(Prestamo p) {
         System.out.println("---- REPORTE DE PRÉSTAMO ----");
-        p.mostrarInfo();
+        p.mostrarPrestamo();
     }
 
 }
