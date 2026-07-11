@@ -4,7 +4,7 @@
  */
 package modelo;
 
-import java.util.HashSet;
+
 
 /**
  *
@@ -17,7 +17,7 @@ public class Libro {
     private String categoria;
     private boolean disponible; 
     
-    public Libro (String codigo, String titulo, String categoria, boolean disponible){
+    public Libro (String codigo, String titulo,String autor, String categoria, boolean disponible){
         this.codigo = codigo;
         this.titulo = titulo;
         this.autor = autor;
@@ -34,9 +34,8 @@ public class Libro {
  public String getTitulo() {
     return titulo;
 }
- public String setTitulo(String titulo){
+ public void setTitulo(String titulo){
         this.titulo = titulo;
-        return null;
 }
  public String getAutor(){
      return autor;
