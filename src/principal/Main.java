@@ -12,7 +12,7 @@ import modelo.Prestamo;
 import reportes.Reporte;
 import servicio.Login;
 import persistencia.Archivo;
-
+import java.time.LocalDate;
 
 
 public class Main {
@@ -21,10 +21,16 @@ public class Main {
        
         Scanner teclado = new Scanner(System.in);
 
-       Biblioteca biblioteca = new Biblioteca();
-       
-       Archivo archivo = new Archivo();
-       
+Biblioteca biblioteca = new Biblioteca();
+
+Archivo archivo = new Archivo();
+
+archivo.cargarUsuarios(biblioteca);
+
+ archivo.cargarLibros(biblioteca);
+ 
+ archivo.cargarPrestamos(biblioteca);
+         
        Login login = new Login();
        
        Usuario usuarioAdmin = new Usuario(
@@ -142,22 +148,79 @@ public class Main {
 
     break;
 
-   case 3:
+ 
+case 3:
 
     teclado.nextLine();
 
     System.out.print("Usuario que realiza el préstamo: ");
     String usuarioPrestamo = teclado.nextLine();
 
-    System.out.print("Libro prestado: ");
+    Usuario usuarioBuscado = biblioteca.buscarPorUsuario(usuarioPrestamo);
+
+    if (usuarioBuscado == null) {
+        System.out.println("El usuario no existe.");
+        break;
+    }
+
+    System.out.print("Libro prestado (código): ");
     String libroPrestamo = teclado.nextLine();
 
-    System.out.print("Fecha de préstamo: ");
-    String fechaPrestamo = teclado.nextLine();
+    Libro libroBuscado = biblioteca.buscarLibro(libroPrestamo);
 
-    System.out.print("Fecha de devolución: ");
-    String fechaDevolucion = teclado.nextLine();
+    if (libroBuscado == null) {
+        System.out.println("El libro no existe.");
+        break;
+    }
 
+    if (!libroBuscado.isDisponible()) {
+        System.out.println("El libro ya está prestado.");
+        break;
+    }
+
+    System.out.print("Año de préstamo: ");
+    int anioPrestamo = teclado.nextInt();
+
+    System.out.print("Mes de préstamo: ");
+    int mesPrestamo = teclado.nextInt();
+
+    System.out.print("Día de préstamo: ");
+    int diaPrestamo = teclado.nextInt();
+
+    System.out.print("Año de devolución: ");
+    int anioDevolucion = teclado.nextInt();
+
+    System.out.print("Mes de devolución: ");
+    int mesDevolucion = teclado.nextInt();
+
+    System.out.print("Día de devolución: ");
+    int diaDevolucion = teclado.nextInt();
+
+    LocalDate fechaPrestamo;
+    LocalDate fechaDevolucion;
+
+    try {
+
+        fechaPrestamo = LocalDate.of(
+                anioPrestamo,
+                mesPrestamo,
+                diaPrestamo
+        );
+
+        fechaDevolucion = LocalDate.of(
+                anioDevolucion,
+                mesDevolucion,
+                diaDevolucion
+        );
+
+    } catch (Exception e) {
+
+        System.out.println("Fecha inválida.");
+        break;
+
+    }
+
+    libroBuscado.setDisponible(false);
 
     Prestamo nuevoPrestamo = new Prestamo(
             usuarioPrestamo,
@@ -166,14 +229,12 @@ public class Main {
             fechaDevolucion
     );
 
-
     biblioteca.agregarPrestamo(nuevoPrestamo);
-
+    archivo.guardarPrestamo(nuevoPrestamo);
 
     System.out.println("Préstamo registrado correctamente.");
 
     break;
-
     case 4:
 
     biblioteca.mostrarLibros();
